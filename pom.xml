@@ -1,0 +1,209 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.holisticon.maven</groupId>
+    <artifactId>holisticon-oss-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>9</version>
+        <relativePath />
+    </parent>
+
+    <organization>
+        <name>Holisticon AG</name>
+        <url>http://www.holisticon.de/</url>
+    </organization>
+
+    <description>
+        Parent pom for all holisticon OSS projects. Use this instead of sonatype/oss-parent for common properties and
+        pre-configured modules.
+    </description>
+    <url>https://github.com/holisticon/holisticon-maven/holisticon-oss-parent</url>
+
+    <properties>
+        <!-- overwrite these properties in your pom.xml if needed -->
+        <java.version>1.7</java.version>
+
+        <!-- optional: to use the "exec" and "shade" plugins, the child pom should set a main application class -->
+        <mainClass />
+
+        <!-- normally you won't overwrite the properties below -->
+        <encoding>UTF-8</encoding>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <project.build.resourceEncoding>${encoding}</project.build.resourceEncoding>
+
+        <!-- set the (latest) version of the used plugins here -->
+        <plugin.compiler.version>3.1</plugin.compiler.version>
+        <plugin.deploy.version>2.7</plugin.deploy.version>
+        <plugin.release.version>2.5</plugin.release.version>
+        <plugin.help.version>2.2</plugin.help.version>
+        <plugin.exec.version>1.3.2</plugin.exec.version>
+        <plugin.shade.version>2.3</plugin.shade.version>
+        <plugin.jar.version>2.5</plugin.jar.version>
+        <plugin.dependency.version>2.8</plugin.dependency.version>
+        <plugin.clean.version>2.5</plugin.clean.version>
+        <plugin.versions.version>2.1</plugin.versions.version>
+    </properties>
+
+    <build>
+        <defaultGoal>clean install</defaultGoal>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${plugin.compiler.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${plugin.deploy.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${plugin.release.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-help-plugin</artifactId>
+                    <version>${plugin.help.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${plugin.clean.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${plugin.dependency.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>${plugin.exec.version}</version>
+                    <configuration>
+                        <mainClass>${mainClass}</mainClass>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>${plugin.shade.version}</version>
+                    <configuration>
+                        <createDependencyReducedPom>true</createDependencyReducedPom>
+                        <filters>
+                            <filter>
+                                <artifact>*:*</artifact>
+                                <excludes>
+                                    <exclude>META-INF/*.SF</exclude>
+                                    <exclude>META-INF/*.DSA</exclude>
+                                    <exclude>META-INF/*.RSA</exclude>
+                                </excludes>
+                            </filter>
+                        </filters>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>shade</goal>
+                            </goals>
+                            <configuration>
+                                <transformers>
+                                    <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                        <mainClass>${mainClass}</mainClass>
+                                    </transformer>
+                                </transformers>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${plugin.jar.version}</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <plugin>
+		    <!-- http://mojo.codehaus.org/versions-maven-plugin/plugin-info.html -->
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${plugin.version.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-help-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <licenses>
+        <license>
+            <name>Revised BSD License</name>
+            <url>
+                http://en.wikipedia.org/wiki/BSD_licenses#3-clause_license_.28.22Revised_BSD_License.22.2C_.22New_BSD_License.22.2C_or_.22Modified_BSD_License.22.29
+            </url>
+            <comments>see LICENSE.txt</comments>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <url>https://github.com/holisticon/holisticon-maven/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:https://github.com/holisticon/holisticon-maven.git</connection>
+        <developerConnection>scm:git:https://github.com/holisticon/holisticon-maven.git</developerConnection>
+        <url>scm:git:https://github.com/holisticon/holisticon-maven.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
+</project>
