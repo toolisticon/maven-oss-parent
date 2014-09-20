@@ -200,10 +200,10 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:git:https://github.com/holisticon/holisticon-maven.git</connection>
-        <developerConnection>scm:git:https://github.com/holisticon/holisticon-maven.git</developerConnection>
-        <url>scm:git:https://github.com/holisticon/holisticon-maven.git</url>
-        <tag>HEAD</tag>
+	<connection>scm:git:git@github.com:holisticon/holisticon-oss-parent.git</connection>
+	<developerConnection>scm:git:git@github.com:holisticon/holisticon-oss-parent.git</developerConnection>
+	<url>git@github.com:holisticon/holisticon-oss-parent.git</url>
+	<tag>HEAD</tag>
     </scm>
 
 </project>
