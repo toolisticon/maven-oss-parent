@@ -22,7 +22,7 @@
         Parent pom for all holisticon OSS projects. Use this instead of sonatype/oss-parent for common properties and
         pre-configured modules.
     </description>
-    <url>https://github.com/holisticon/holisticon-maven/holisticon-oss-parent</url>
+    <url>https://github.com/holisticon/holisticon-oss-parent</url>
 
     <properties>
         <!-- overwrite these properties in your pom.xml if needed -->
@@ -207,7 +207,7 @@
     </licenses>
 
     <issueManagement>
-        <url>https://github.com/holisticon/holisticon-maven/issues</url>
+        <url>https://github.com/holisticon/holisticon-os-parent/issues</url>
         <system>GitHub Issues</system>
     </issueManagement>
 
