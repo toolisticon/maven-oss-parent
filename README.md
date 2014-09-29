@@ -8,7 +8,7 @@ Common parent pom.xml for holistic FOSS projects.
 <parent>
   <groupId>de.holisticon.maven</groupId>
   <artifactId>holisticon-oss-parent</artifactId>
-  <version>...</version>
+  <version>1.0</version>
 </parent>
 ```
 
