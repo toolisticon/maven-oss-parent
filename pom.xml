@@ -69,7 +69,8 @@
 		
 		<plugin.resources.version>2.7</plugin.resources.version>
 		
-		<target.webapp>${basedir}/target/webapp</target.webapp>
+		<yeomanProjectDirectory>yo</yeomanProjectDirectory>
+		<yeomanTargetDirectory>${basedir}/target/${artifactId}-${version}</yeomanTargetDirectory>
     </properties>
 
 
@@ -303,85 +304,87 @@
             <id>yo-mixed-mode</id>
             <activation>
                 <file>
-                    <exists>yo</exists>
+                    <exists>${yeomanProjectDirectory}</exists>
                 </file>
             </activation>
             <build>
-				<plugin>
-					<groupId>com.github.trecloux</groupId>
-					<artifactId>yeoman-maven-plugin</artifactId>
-					<version>${plugin.yeoman.version}</version>
-					<executions>
-						<execution>
-							<goals>
-								<goal>build</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>${plugin.clean.version}</version>
-					<configuration>
-						<filesets>
-							<fileset>
-								<directory>yo/dist</directory>
-							</fileset>
-							<fileset>
-								<directory>yo/.tmp</directory>
-							</fileset>
-							<fileset>
-								<directory>yo/bower_components</directory>
-							</fileset>
-							<fileset>
-								<directory>yo/node_modules</directory>
-							</fileset>
-						</filesets>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>exec-maven-plugin</artifactId>
-					<version>${plugin.exec.version}</version>
-					<executions>
-						<execution>
-							<phase>generate-sources</phase>
-							<goals>
-								<goal>exec</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<executable>bower</executable>
-						<arguments>
-							<argument>install</argument>
-						</arguments>
-						<workingDirectory>${basedir}/yo</workingDirectory>
-					</configuration>
-				</plugin>
-				<plugin>
-					<artifactId>maven-resources-plugin</artifactId>
-					<version>${plugin.resources.version}</version>
-					<executions>
-						<execution>
-							<id>copy-resources</id>
-							<!-- here the phase you need -->
-							<phase>prepare-package</phase>
-							<goals>
-								<goal>copy-resources</goal>
-							</goals>
-							<configuration>
-								<outputDirectory>${target.webapp}</outputDirectory>
-								<resources>
-									<resource>
-										<directory>yo/dist</directory>
-									</resource>
-								</resources>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
+				<plugins>
+					<plugin>
+						<groupId>com.github.trecloux</groupId>
+						<artifactId>yeoman-maven-plugin</artifactId>
+						<version>${plugin.yeoman.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>build</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<artifactId>maven-clean-plugin</artifactId>
+						<version>${plugin.clean.version}</version>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>${yeomanProjectDirectory}/dist</directory>
+								</fileset>
+								<fileset>
+									<directory>${yeomanProjectDirectory}/.tmp</directory>
+								</fileset>
+								<fileset>
+									<directory>${yeomanProjectDirectory}/bower_components</directory>
+								</fileset>
+								<fileset>
+									<directory>${yeomanProjectDirectory}/node_modules</directory>
+								</fileset>
+							</filesets>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>${plugin.exec.version}</version>
+						<executions>
+							<execution>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<executable>bower</executable>
+							<arguments>
+								<argument>install</argument>
+							</arguments>
+							<workingDirectory>${basedir}/${yeomanProjectDirectory}</workingDirectory>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>${plugin.resources.version}</version>
+						<executions>
+							<execution>
+								<id>copy-resources</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<configuration>
+									<outputDirectory>${yeomanTargetDirectory}</outputDirectory>
+									<resources>
+										<resource>
+											<directory>${yeomanProjectDirectory}/dist</directory>
+										</resource>
+									</resources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
 			</build>
+		</profile>
 	</profiles>
 
     <licenses>
