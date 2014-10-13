@@ -57,13 +57,19 @@
 
         <plugin.dependency.version>2.8</plugin.dependency.version>
 
-        <plugin.clean.version>2.5</plugin.clean.version>
+        <plugin.clean.version>2.6</plugin.clean.version>
 
         <plugin.versions.version>2.1</plugin.versions.version>
 
         <plugin.scala.version>3.2.0</plugin.scala.version>
 
         <scala.version>2.11.3</scala.version>
+		
+		<plugin.yeoman.version>0.2</plugin.yeoman.version>
+		
+		<plugin.resources.version>2.7</plugin.resources.version>
+		
+		<target.webapp>${basedir}/target/webapp</target.webapp>
     </properties>
 
 
@@ -289,7 +295,94 @@
                 </plugins>
             </build>
         </profile>
-    </profiles>
+        <profile>
+            <!--
+                This profile is activated once a "yo" directory is present on the project.
+                Yo/Grunt and Java are combined to a common WAR file.
+            // -->
+            <id>yo-mixed-mode</id>
+            <activation>
+                <file>
+                    <exists>yo</exists>
+                </file>
+            </activation>
+            <build>
+				<plugin>
+					<groupId>com.github.trecloux</groupId>
+					<artifactId>yeoman-maven-plugin</artifactId>
+					<version>${plugin.yeoman.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>build</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${plugin.clean.version}</version>
+					<configuration>
+						<filesets>
+							<fileset>
+								<directory>yo/dist</directory>
+							</fileset>
+							<fileset>
+								<directory>yo/.tmp</directory>
+							</fileset>
+							<fileset>
+								<directory>yo/bower_components</directory>
+							</fileset>
+							<fileset>
+								<directory>yo/node_modules</directory>
+							</fileset>
+						</filesets>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>${plugin.exec.version}</version>
+					<executions>
+						<execution>
+							<phase>generate-sources</phase>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<executable>bower</executable>
+						<arguments>
+							<argument>install</argument>
+						</arguments>
+						<workingDirectory>${basedir}/yo</workingDirectory>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${plugin.resources.version}</version>
+					<executions>
+						<execution>
+							<id>copy-resources</id>
+							<!-- here the phase you need -->
+							<phase>prepare-package</phase>
+							<goals>
+								<goal>copy-resources</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${target.webapp}</outputDirectory>
+								<resources>
+									<resource>
+										<directory>yo/dist</directory>
+									</resource>
+								</resources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</build>
+	</profiles>
 
     <licenses>
         <license>
