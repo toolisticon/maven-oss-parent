@@ -41,7 +41,6 @@
 
         <!-- set the (latest) version of the used plugins here -->
         <plugin.compiler.version>3.1</plugin.compiler.version>
-        <plugin.compiler.phase>compile</plugin.compiler.phase>
 
         <plugin.surefire.version>2.17</plugin.surefire.version>
 
@@ -81,16 +80,6 @@
                         <source>${java.version}</source>
                         <target>${java.version}</target>
                     </configuration>
-                    <executions>
-                        <execution>
-                            <id>default-compile</id>
-                            <phase>${plugin.compiler.phase}</phase>
-                        </execution>
-                        <execution>
-                            <id>default-testCompile</id>
-                            <phase>${plugin.compiler.phase}</phase>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -231,15 +220,17 @@
 
     <profiles>
         <profile>
+            <!--
+                This profile is activated once a src/main/scala directory is present on the project.
+                Scala and java sources are compiled via scala compiler, java compiler plugin is disabled.
+            // -->
             <id>scala-mixed-mode</id>
             <activation>
                 <file>
                     <exists>src/main/scala</exists>
                 </file>
             </activation>
-            <properties>
-                <plugin.compiler.phase>none</plugin.compiler.phase>
-            </properties>
+
             <dependencies>
                 <dependency>
                     <groupId>org.scala-lang</groupId>
@@ -281,6 +272,20 @@
                                 <goals>
                                     <goal>testCompile</goal>
                                 </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <!-- disable java compiler in mixed scala projects -->
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>default-compile</id>
+                                <phase>none</phase>
+                            </execution>
+                            <execution>
+                                <id>default-testCompile</id>
+                                <phase>none</phase>
                             </execution>
                         </executions>
                     </plugin>
