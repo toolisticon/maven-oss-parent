@@ -433,6 +433,14 @@
             </build>
         </profile>
 
+        <!-- do not skip itests in integration-test phase-->
+        <profile>
+            <id>integration-test</id>
+            <properties>
+                <skipITests>false</skipITests>
+            </properties>
+        </profile>
+
         <profile>
             <id>info</id>
             <build>

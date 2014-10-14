@@ -75,9 +75,14 @@ Testing is activated automatically once a src/test directory is present.
 It contains the following plugins:
  
  <dl>
-    <dt>[maven-failsafe-plugin](http://maven.apache.org/surefire/maven-failsafe-plugin/)
     <dt>[maven-surefire-plugin](http://maven.apache.org/surefire/maven-surefire-plugin/)
- 
+    <dd>runs all tests with junit except classes matching the itest pattern (*ITest.java) or inside a package named itest</dd>
+    
+    <dt>[maven-failsafe-plugin](http://maven.apache.org/surefire/maven-failsafe-plugin/)
+    <dd>runs integration tests (mvn integration-test). All tests not matching the itest pattern or inside an itest package are skipped.</dd>
+    <dd>running itests must be activated by enabling the integration-test profile (mvn clean install -Pintegration-test)</dd>
+    
+    
  </dl>
 
 
