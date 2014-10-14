@@ -55,7 +55,6 @@
 
         <plugin.jar.version>2.5</plugin.jar.version>
 
-        <plugin.release.version>2.5</plugin.release.version>
         <plugin.resources.version>2.7</plugin.resources.version>
 
         <plugin.scala.version>3.2.0</plugin.scala.version>
@@ -134,12 +133,6 @@
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>${plugin.release.version}</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${plugin.resources.version}</version>
                 </plugin>
@@ -213,10 +206,6 @@
 
             <plugin>
                 <artifactId>maven-help-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
             </plugin>
 
             <plugin>
