@@ -33,7 +33,7 @@
         <mainClass/>
         <skipDeploy>false</skipDeploy>
         <yeomanProjectDirectory>yo</yeomanProjectDirectory>
-        <yeomanTargetDirectory>${basedir}/target/${artifactId}-${version}</yeomanTargetDirectory>
+        <yeomanTargetDirectory>${basedir}/target/${project.artifactId}-${project.version}</yeomanTargetDirectory>
 
         <scala.version>2.11.3</scala.version>
 
