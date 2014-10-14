@@ -65,3 +65,11 @@ AngularJS frontend build by a yeoman generator. The profile for this is "yo-mixe
 - yo.build.skip skip the yo build (defaults to false)
 - yo.test.skip skip the test run (defaults to false)
 - yo.skip skip all (defaults to false)
+
+## Info
+
+The info profile can be used for maintenance of this project. It supports the version plugin to check if newer versions 
+of used plugins are available.
+
+    mvn -Pinfo versions:display-plugin-updates
+
