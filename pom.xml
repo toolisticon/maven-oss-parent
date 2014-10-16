@@ -42,6 +42,9 @@
         <yeomanProjectDirectory>yo</yeomanProjectDirectory>
         <yeomanTargetDirectory>${basedir}/target/${project.artifactId}-${project.version}</yeomanTargetDirectory>
 
+        <pattern.package.itest>**/itest/*.java</pattern.package.itest>
+        <pattern.class.itest>**/*ITest.java</pattern.class.itest>
+
         <scala.version>2.11.3</scala.version>
 
         <!-- normally you won't overwrite the properties below -->
@@ -74,6 +77,8 @@
 
         <plugin.versions.version>2.1</plugin.versions.version>
 
+        <plugin.war.version>2.5</plugin.war.version>
+
         <plugin.yeoman.version>0.2</plugin.yeoman.version>
     </properties>
 
@@ -83,13 +88,11 @@
             <plugins>
                 <!-- plugins in alphabetical order, versions defined in properties -->
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${plugin.clean.version}</version>
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${plugin.compiler.version}</version>
                     <configuration>
@@ -99,13 +102,11 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>${plugin.dependency.version}</version>
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${plugin.deploy.version}</version>
                     <configuration>
@@ -123,19 +124,16 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-help-plugin</artifactId>
                     <version>${plugin.help.version}</version>
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
                     <version>${plugin.install.version}</version>
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${plugin.jar.version}</version>
                     <configuration>
@@ -149,13 +147,11 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${plugin.resources.version}</version>
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
                     <version>${plugin.shade.version}</version>
                     <configuration>
@@ -192,7 +188,6 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>${plugin.site.version}</version>
                 </plugin>
@@ -201,6 +196,15 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
                     <version>${plugin.versions.version}</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${plugin.war.version}</version>
+                    <configuration>
+                        <!-- Since servlet api 3.0 web.xml is no longer required. -->
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -216,10 +220,6 @@
 
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-help-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
@@ -296,6 +296,7 @@
                 </plugins>
             </build>
         </profile>
+
         <!--
             This profile is activated once a "yo" directory is present on the project.
             Yo/Grunt and Java are combined to a common WAR file.
@@ -383,10 +384,15 @@
             </build>
         </profile>
 
+        <!--
+            The testing profile is automatically activated once a src/test/java dir is found on the project.
+        -->
         <profile>
-            <id>testing</id>
+            <id>testing-java</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <file>
+                    <exists>src/test/java</exists>
+                </file>
             </activation>
 
             <build>
@@ -397,6 +403,10 @@
                         <version>${plugin.surefire.version}</version>
                         <configuration>
                             <runOrder>random</runOrder>
+                            <excludes>
+                                <exclude>${pattern.class.itest}</exclude>
+                                <exclude>${pattern.package.itest}</exclude>
+                            </excludes>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -413,17 +423,24 @@
                         </executions>
                         <configuration>
                             <skipTests>${skipITests}</skipTests>
-                            <!--
                             <includes>
-                                <include>${itest.package.pattern}</include>
-                                <include>${itest.class.pattern}</include>
+                                <include>${pattern.class.itest}</include>
+                                <include>${pattern.package.itest}</include>
                             </includes>
-                            -->
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
+
+        <!-- do not skip itests in integration-test phase-->
+        <profile>
+            <id>integration-test</id>
+            <properties>
+                <skipITests>false</skipITests>
+            </properties>
+        </profile>
+
         <profile>
             <id>info</id>
             <build>
@@ -431,6 +448,9 @@
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>versions-maven-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-help-plugin</artifactId>
                     </plugin>
                 </plugins>
             </build>

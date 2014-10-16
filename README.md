@@ -1,3 +1,5 @@
+<img src="https://www.holisticon.de/wp-content/uploads/2013/05/holisticon-logo-hamburg.gif" align="right" />
+
 # holisticon-oss-parent
 
 Common parent pom.xml for holistic FOSS projects.
@@ -20,11 +22,14 @@ This parent pom is release on maven central so it is sufficient to use it direct
 
 # Plugins
 
-* maven-help-plugin
-
 ## Included
 
-* tba
+<dl>
+  <dt>[maven-versions-plugin](http://mojo.codehaus.org/versions-maven-plugin/index.html)</dt>
+  <dd>helps to set/change versions and (more importantly) can find updates of dependencies and plugins.</dd>
+  
+  <dt>[scala-maven-plugin](http://davidb.github.io/scala-maven-plugin/plugin-info.html)
+</dl>
 
 ## Not Included
 
@@ -36,9 +41,6 @@ on maven-central. We should not mix configurations, so the following plugins sho
 * maven-source-plugin#2.1.2 - attach sources.jar to the release
 * maven-javadoc-plugin#2.7 - attach javadoc to the release
 * maven-gpg-plugin#1.1 - sign the artifacts to release
-
-
-
 
 ## Content:
 
@@ -55,8 +57,8 @@ The configured profile is activated automatically if a src/main/scala directory 
 
 ## Angular/Grunt support for mixed applications
 
-With 1.2 the pom supports creation of mixed applications contaning of a web application (WAR) delivering an 
-AngularJS frontend build by a yeoman generator. The profile for this is "yo-mixed-mode". The default location for the yo sources is "yo" and can be overwritten by the yeomanProjectDirectory property. If using default yo-generator, it creates a Grunt file with an option not matching the latest version of a used component. To fix it, please remove "options" from "wiredep" target.
+With 1.2 the pom supports creation of mixed applications containing of a web application (WAR) delivering an 
+AngularJS front-end build by a yeoman generator. The profile for this is "yo-mixed-mode". The default location for the yo sources is "yo" and can be overwritten by the yeomanProjectDirectory property. If using default yo-generator, it creates a Grunt file with an option not matching the latest version of a used component. To fix it, please remove "options" from "wiredep" target.
 
 ###Options
 
@@ -66,10 +68,21 @@ AngularJS frontend build by a yeoman generator. The profile for this is "yo-mixe
 - yo.test.skip skip the test run (defaults to false)
 - yo.skip skip all (defaults to false)
 
-## Info
+## Testing
 
-The info profile can be used for maintenance of this project. It supports the version plugin to check if newer versions 
-of used plugins are available.
+Testing is activated automatically once a src/test directory is present.
 
-    mvn -Pinfo versions:display-plugin-updates
+It contains the following plugins:
+ 
+ <dl>
+    <dt>[maven-surefire-plugin](http://maven.apache.org/surefire/maven-surefire-plugin/)
+    <dd>runs all tests with junit except classes matching the itest pattern (*ITest.java) or inside a package named itest</dd>
+    
+    <dt>[maven-failsafe-plugin](http://maven.apache.org/surefire/maven-failsafe-plugin/)
+    <dd>runs integration tests (mvn integration-test). All tests not matching the itest pattern or inside an itest package are skipped.</dd>
+    <dd>running itests must be activated by enabling the integration-test profile (mvn clean install -Pintegration-test)</dd>
+    
+    
+ </dl>
+
 
