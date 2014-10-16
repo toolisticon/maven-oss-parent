@@ -385,13 +385,13 @@
         </profile>
 
         <!--
-            The testing profile is automatically activated once a src/test dir is found on the project.
+            The testing profile is automatically activated once a src/test/java dir is found on the project.
         -->
         <profile>
-            <id>testing</id>
+            <id>testing-java</id>
             <activation>
                 <file>
-                    <exists>src/test</exists>
+                    <exists>src/test/java</exists>
                 </file>
             </activation>
 
