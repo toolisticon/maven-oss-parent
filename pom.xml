@@ -25,15 +25,25 @@
     </description>
     <url>https://github.com/holisticon/holisticon-oss-parent</url>
 
+    <prerequisites>
+        <maven>3.0.4</maven>
+    </prerequisites>
+
     <properties>
         <!-- overwrite these properties in your pom.xml if needed -->
         <java.version>1.7</java.version>
 
         <!-- optional: to use the "exec" and "shade" plugins, the child pom should set a main application class -->
         <mainClass/>
+
         <skipDeploy>false</skipDeploy>
+        <skipITests>true</skipITests>
+
         <yeomanProjectDirectory>yo</yeomanProjectDirectory>
         <yeomanTargetDirectory>${basedir}/target/${project.artifactId}-${project.version}</yeomanTargetDirectory>
+
+        <pattern.package.itest>**/itest/*.java</pattern.package.itest>
+        <pattern.class.itest>**/*ITest.java</pattern.class.itest>
 
         <scala.version>2.11.3</scala.version>
 
@@ -44,14 +54,17 @@
 
         <!-- set the (latest) version of the used plugins here, please use alphabetical order -->
         <plugin.clean.version>2.6</plugin.clean.version>
-        <plugin.compiler.version>3.1</plugin.compiler.version>
+        <plugin.compiler.version>3.2</plugin.compiler.version>
 
-        <plugin.dependency.version>2.8</plugin.dependency.version>
-        <plugin.deploy.version>2.7</plugin.deploy.version>
+        <plugin.dependency.version>2.9</plugin.dependency.version>
+        <plugin.deploy.version>2.8.2</plugin.deploy.version>
 
         <plugin.exec.version>1.3.2</plugin.exec.version>
 
+        <plugin.failsafe.version>2.17</plugin.failsafe.version>
+
         <plugin.help.version>2.2</plugin.help.version>
+        <plugin.install.version>2.5.2</plugin.install.version>
 
         <plugin.jar.version>2.5</plugin.jar.version>
 
@@ -59,9 +72,12 @@
 
         <plugin.scala.version>3.2.0</plugin.scala.version>
         <plugin.shade.version>2.3</plugin.shade.version>
+        <plugin.site.version>3.4</plugin.site.version>
         <plugin.surefire.version>2.17</plugin.surefire.version>
 
         <plugin.versions.version>2.1</plugin.versions.version>
+
+        <plugin.war.version>2.5</plugin.war.version>
 
         <plugin.yeoman.version>0.2</plugin.yeoman.version>
     </properties>
@@ -72,13 +88,11 @@
             <plugins>
                 <!-- plugins in alphabetical order, versions defined in properties -->
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${plugin.clean.version}</version>
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${plugin.compiler.version}</version>
                     <configuration>
@@ -88,13 +102,11 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>${plugin.dependency.version}</version>
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${plugin.deploy.version}</version>
                     <configuration>
@@ -112,13 +124,16 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-help-plugin</artifactId>
                     <version>${plugin.help.version}</version>
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${plugin.install.version}</version>
+                </plugin>
+
+                <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>${plugin.jar.version}</version>
                     <configuration>
@@ -132,13 +147,11 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${plugin.resources.version}</version>
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-shade-plugin</artifactId>
                     <version>${plugin.shade.version}</version>
                     <configuration>
@@ -175,18 +188,23 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${plugin.surefire.version}</version>
-                    <configuration>
-                        <runOrder>random</runOrder>
-                    </configuration>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${plugin.site.version}</version>
                 </plugin>
 
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>versions-maven-plugin</artifactId>
-                    <version>${plugin.version.version}</version>
+                    <version>${plugin.versions.version}</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>${plugin.war.version}</version>
+                    <configuration>
+                        <!-- Since servlet api 3.0 web.xml is no longer required. -->
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -202,14 +220,6 @@
 
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-help-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
@@ -287,6 +297,7 @@
                 </plugins>
             </build>
         </profile>
+
         <!--
             This profile is activated once a "yo" directory is present on the project.
             Yo/Grunt and Java are combined to a common WAR file.
@@ -369,6 +380,78 @@
                                 </configuration>
                             </execution>
                         </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!--
+            The testing profile is automatically activated once a src/test/java dir is found on the project.
+        -->
+        <profile>
+            <id>testing-java</id>
+            <activation>
+                <file>
+                    <exists>src/test/java</exists>
+                </file>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <version>${plugin.surefire.version}</version>
+                        <configuration>
+                            <runOrder>random</runOrder>
+                            <excludes>
+                                <exclude>${pattern.class.itest}</exclude>
+                                <exclude>${pattern.package.itest}</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>${plugin.failsafe.version}</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>integration-test</goal>
+                                    <goal>verify</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <skipTests>${skipITests}</skipTests>
+                            <includes>
+                                <include>${pattern.class.itest}</include>
+                                <include>${pattern.package.itest}</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- do not skip itests in integration-test phase-->
+        <profile>
+            <id>integration-test</id>
+            <properties>
+                <skipITests>false</skipITests>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>info</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>versions-maven-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-help-plugin</artifactId>
                     </plugin>
                 </plugins>
             </build>
