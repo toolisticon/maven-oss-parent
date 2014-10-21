@@ -266,6 +266,12 @@
                     <artifactId>scala-library</artifactId>
                     <version>${scala.version}</version>
                 </dependency>
+                <dependency>
+                    <groupId>org.scalatest</groupId>
+                    <artifactId>scalatest_2.11</artifactId>
+                    <version>2.2.2</version>
+                    <scope>test</scope>
+                </dependency>
             </dependencies>
             <build>
                 <plugins>
@@ -419,6 +425,15 @@
                     <exists>src/test/java</exists>
                 </file>
             </activation>
+
+            <dependencies>
+                <dependency>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                    <version>4.11</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
 
             <build>
                 <plugins>
