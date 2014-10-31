@@ -2,6 +2,8 @@
 
 # holisticon-oss-parent
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.holisticon.maven/holisticon-oss-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.holisticon.maven/holisticon-oss-parent)
+
 Common parent pom.xml for holistic FOSS projects.
 
 ## Usage
