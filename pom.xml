@@ -438,6 +438,8 @@
                                 <exclude>${pattern.class.itest}</exclude>
                                 <exclude>${pattern.package.itest}</exclude>
                             </excludes>
+                            <!-- prevent the annoying ForkedBooter process from stealing window focus on Mac OS -->
+                            <argLine>-Djava.awt.headless=true</argLine>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -458,6 +460,8 @@
                                 <include>${pattern.class.itest}</include>
                                 <include>${pattern.package.itest}</include>
                             </includes>
+                            <!-- prevent the annoying ForkedBooter process from stealing window focus on Mac OS -->
+                            <argLine>-Djava.awt.headless=true</argLine>
                         </configuration>
                     </plugin>
                 </plugins>
