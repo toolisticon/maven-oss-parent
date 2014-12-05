@@ -71,6 +71,8 @@
 
         <plugin.jar.version>2.5</plugin.jar.version>
 
+        <plugin.release.version>2.5.1</plugin.release.version>
+
         <plugin.resources.version>2.7</plugin.resources.version>
 
         <plugin.scala.version>3.2.0</plugin.scala.version>
@@ -168,6 +170,11 @@
                             </manifest>
                         </archive>
                     </configuration>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>${plugin.release.version}</version>
                 </plugin>
 
                 <plugin>
