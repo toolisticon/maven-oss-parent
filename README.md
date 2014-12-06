@@ -16,24 +16,17 @@ This parent pom is release on maven central so it is sufficient to use it direct
 <parent>
   <groupId>de.holisticon.maven</groupId>
   <artifactId>holisticon-oss-parent</artifactId>
-  <version>...</version>
+  <version>2</version>
   <relativePath />
 </parent>
 ```
-
-* current development version: 2-SNAPSHOT
-* latest released version: 1.1
 
 # Plugins
 
 ## Included
 
-<dl>
-  <dt>[maven-versions-plugin](http://mojo.codehaus.org/versions-maven-plugin/index.html)</dt>
-  <dd>helps to set/change versions and (more importantly) can find updates of dependencies and plugins.</dd>
-  
-  <dt>[scala-maven-plugin](http://davidb.github.io/scala-maven-plugin/plugin-info.html)
-</dl>
+* **[maven-versions-plugin](http://mojo.codehaus.org/versions-maven-plugin/index.html)** - helps to set/change versions and (more importantly) can find updates of dependencies and plugins.
+* **[scala-maven-plugin](http://davidb.github.io/scala-maven-plugin/plugin-info.html)** - mixed java/scala builds
 
 ## Not Included
 
