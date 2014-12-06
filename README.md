@@ -1,8 +1,10 @@
-<img src="https://www.holisticon.de/wp-content/uploads/2013/05/holisticon-logo-hamburg.gif" align="right" />
+[<img src="https://www.holisticon.de/wp-content/uploads/2013/05/holisticon-logo-hamburg.gif" align="right" />](https://server.holisticon.de/jenkins/job/holisticon-oss-parent/)
+
 
 # holisticon-oss-parent
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.holisticon.maven/holisticon-oss-parent/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.holisticon.maven/holisticon-oss-parent)
+
 
 Common parent pom.xml for holistic FOSS projects.
 
