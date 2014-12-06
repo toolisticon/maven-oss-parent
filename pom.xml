@@ -52,7 +52,7 @@
         <project.build.resourceEncoding>${encoding}</project.build.resourceEncoding>
 
         <!-- set the (latest) version of the used plugins here, please use alphabetical order -->
-        <plugin.cargo.version>1.4.10</plugin.cargo.version>
+        <plugin.cargo.version>1.4.11</plugin.cargo.version>
         <plugin.clean.version>2.6</plugin.clean.version>
         <plugin.compiler.version>3.2</plugin.compiler.version>
 
