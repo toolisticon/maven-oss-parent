@@ -1,534 +1,351 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.holisticon.maven</groupId>
-    <artifactId>holisticon-oss-parent</artifactId>
-    <version>3-SNAPSHOT</version>
-    <packaging>pom</packaging>
+  <groupId>de.holisticon.toolbox.maven</groupId>
+  <artifactId>toolbox-maven-oss-parent</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-        <relativePath />
-    </parent>
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>9</version>
+    <relativePath/>
+  </parent>
 
-    <organization>
-        <name>Holisticon AG</name>
-        <url>http://www.holisticon.de/</url>
-    </organization>
+  <organization>
+    <name>Holisticon AG</name>
+    <url>http://www.holisticon.de/</url>
+  </organization>
 
-    <description>
-        Parent pom for all holisticon OSS projects. Use this instead of sonatype/oss-parent for common properties and
-        pre-configured modules.
-    </description>
-    <url>https://github.com/holisticon/holisticon-oss-parent</url>
+  <description>
+    Parent pom for all holisticon OSS projects. Use this instead of sonatype/oss-parent for common properties and
+    pre-configured modules.
+  </description>
+  <url>https://github.com/holisticon-toolbox/holisticon-oss-parent</url>
 
-    <prerequisites>
-        <maven>3.0.4</maven>
-    </prerequisites>
+  <prerequisites>
+    <maven>3.5.0</maven>
+  </prerequisites>
 
-    <properties>
-        <!-- overwrite these properties in your pom.xml if needed -->
-        <java.version>1.7</java.version>
+  <properties>
+    <!-- overwrite these properties in your pom.xml if needed -->
+    <java.version>1.8</java.version>
+    <project.github.organisation>holisticon-toolbox</project.github.organisation>
 
-        <!-- optional: to use the "exec" and "shade" plugins, the child pom should set a main application class -->
-        <mainClass />
+    <!-- optional: to use the "exec" and "shade" plugins, the child pom should set a main application class -->
+    <mainClass/>
 
-        <skipDeploy>false</skipDeploy>
-        <skipITests>true</skipITests>
+    <skipDeploy>false</skipDeploy>
+    <skipITests>true</skipITests>
 
-        <yeomanProjectDirectory>yo</yeomanProjectDirectory>
-        <yeomanTargetDirectory>${basedir}/target/${project.artifactId}-${project.version}</yeomanTargetDirectory>
+    <yeomanProjectDirectory>yo</yeomanProjectDirectory>
+    <yeomanTargetDirectory>${basedir}/target/${project.artifactId}-${project.version}</yeomanTargetDirectory>
 
-        <pattern.package.itest>**/itest/*.java</pattern.package.itest>
-        <pattern.class.itest>**/*ITest.java</pattern.class.itest>
+    <pattern.package.itest>**/itest/*.java</pattern.package.itest>
+    <pattern.class.itest>**/*ITest.java</pattern.class.itest>
 
-        <scala.version>2.11.3</scala.version>
+    <scala.version>2.11.3</scala.version>
 
-        <!-- normally you won't overwrite the properties below -->
-        <encoding>UTF-8</encoding>
-        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
-        <project.build.resourceEncoding>${encoding}</project.build.resourceEncoding>
+    <!-- normally you won't overwrite the properties below -->
+    <encoding>UTF-8</encoding>
+    <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+    <project.build.resourceEncoding>${encoding}</project.build.resourceEncoding>
 
-        <!-- set the (latest) version of the used plugins here, please use alphabetical order -->
-        <plugin.cargo.version>1.4.11</plugin.cargo.version>
-        <plugin.clean.version>2.6</plugin.clean.version>
-        <plugin.compiler.version>3.2</plugin.compiler.version>
+    <!-- set the (latest) version of the used plugins here, please use alphabetical order -->
+    <plugin.cargo.version>1.4.11</plugin.cargo.version>
+    <plugin.clean.version>2.6</plugin.clean.version>
+    <plugin.compiler.version>3.2</plugin.compiler.version>
 
-        <plugin.dependency.version>2.9</plugin.dependency.version>
-        <plugin.deploy.version>2.8.2</plugin.deploy.version>
+    <plugin.dependency.version>2.9</plugin.dependency.version>
+    <plugin.deploy.version>2.8.2</plugin.deploy.version>
 
-        <plugin.ear.version>2.9.1</plugin.ear.version>
-        <plugin.ejb.version>2.4</plugin.ejb.version>
-        <plugin.exec.version>1.3.2</plugin.exec.version>
+    <plugin.ear.version>2.9.1</plugin.ear.version>
+    <plugin.ejb.version>2.4</plugin.ejb.version>
+    <plugin.exec.version>1.3.2</plugin.exec.version>
 
-        <plugin.failsafe.version>2.17</plugin.failsafe.version>
+    <plugin.failsafe.version>2.17</plugin.failsafe.version>
 
-        <plugin.help.version>2.2</plugin.help.version>
-        <plugin.install.version>2.5.2</plugin.install.version>
+    <plugin.help.version>2.2</plugin.help.version>
+    <plugin.install.version>2.5.2</plugin.install.version>
 
-        <plugin.jar.version>2.5</plugin.jar.version>
+    <plugin.jar.version>2.5</plugin.jar.version>
 
-        <plugin.release.version>2.5.1</plugin.release.version>
+    <plugin.release.version>2.5.1</plugin.release.version>
 
-        <plugin.resources.version>2.7</plugin.resources.version>
+    <plugin.resources.version>2.7</plugin.resources.version>
 
-        <plugin.scala.version>3.2.0</plugin.scala.version>
-        <plugin.shade.version>2.3</plugin.shade.version>
-        <plugin.site.version>3.4</plugin.site.version>
-        <plugin.surefire.version>2.17</plugin.surefire.version>
+    <plugin.scala.version>3.2.0</plugin.scala.version>
+    <plugin.shade.version>2.3</plugin.shade.version>
+    <plugin.site.version>3.4</plugin.site.version>
+    <plugin.surefire.version>2.17</plugin.surefire.version>
 
-        <plugin.versions.version>2.1</plugin.versions.version>
+    <plugin.versions.version>2.1</plugin.versions.version>
 
-        <plugin.war.version>2.5</plugin.war.version>
+    <plugin.war.version>2.5</plugin.war.version>
 
-        <plugin.yeoman.version>0.2</plugin.yeoman.version>
-    </properties>
+    <plugin.yeoman.version>0.2</plugin.yeoman.version>
+  </properties>
 
-    <build>
-        <defaultGoal>clean install</defaultGoal>
-        <pluginManagement>
-            <plugins>
-                <!-- plugins in alphabetical order, versions defined in properties -->
+  <build>
+    <defaultGoal>clean install</defaultGoal>
+    <pluginManagement>
+      <plugins>
+        <!-- plugins in alphabetical order, versions defined in properties -->
 
-                <plugin>
-                    <groupId>org.codehaus.cargo</groupId>
-                    <artifactId>cargo-maven2-plugin</artifactId>
-                    <version>${plugin.cargo.version}</version>
-                </plugin>
+        <plugin>
+          <groupId>org.codehaus.cargo</groupId>
+          <artifactId>cargo-maven2-plugin</artifactId>
+          <version>${plugin.cargo.version}</version>
+        </plugin>
 
-                <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>${plugin.clean.version}</version>
-                </plugin>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${plugin.clean.version}</version>
+        </plugin>
 
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${plugin.compiler.version}</version>
-                    <configuration>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
-                    </configuration>
-                </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${plugin.compiler.version}</version>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+          </configuration>
+        </plugin>
 
-                <plugin>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <version>${plugin.dependency.version}</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>${plugin.deploy.version}</version>
-                    <configuration>
-                        <skip>${skipDeploy}</skip>
-                    </configuration>
-                </plugin>
+        <plugin>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>${plugin.dependency.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${plugin.deploy.version}</version>
+          <configuration>
+            <skip>${skipDeploy}</skip>
+          </configuration>
+        </plugin>
 
-                <plugin>
-                    <artifactId>maven-ear-plugin</artifactId>
-                    <version>${plugin.ear.version}</version>
-                    <configuration>
-                        <defaultLibBundleDir>lib</defaultLibBundleDir>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-ejb-plugin</artifactId>
-                    <version>${plugin.ejb.version}</version>
-                    <configuration>
-                        <ejbVersion>3.1</ejbVersion>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <version>${plugin.exec.version}</version>
-                    <configuration>
-                        <mainClass>${mainClass}</mainClass>
-                    </configuration>
-                </plugin>
+        <plugin>
+          <artifactId>maven-ear-plugin</artifactId>
+          <version>${plugin.ear.version}</version>
+          <configuration>
+            <defaultLibBundleDir>lib</defaultLibBundleDir>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-ejb-plugin</artifactId>
+          <version>${plugin.ejb.version}</version>
+          <configuration>
+            <ejbVersion>3.1</ejbVersion>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>${plugin.exec.version}</version>
+          <configuration>
+            <mainClass>${mainClass}</mainClass>
+          </configuration>
+        </plugin>
 
-                <plugin>
-                    <artifactId>maven-help-plugin</artifactId>
-                    <version>${plugin.help.version}</version>
-                </plugin>
+        <plugin>
+          <artifactId>maven-help-plugin</artifactId>
+          <version>${plugin.help.version}</version>
+        </plugin>
 
-                <plugin>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>${plugin.install.version}</version>
-                </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${plugin.install.version}</version>
+        </plugin>
 
-                <plugin>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>${plugin.jar.version}</version>
-                    <configuration>
-                        <archive>
-                            <manifest>
-                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                            </manifest>
-                        </archive>
-                    </configuration>
-                </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${plugin.jar.version}</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+              </manifest>
+            </archive>
+          </configuration>
+        </plugin>
 
-                <plugin>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>${plugin.release.version}</version>
-                </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${plugin.release.version}</version>
+        </plugin>
 
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>${plugin.resources.version}</version>
-                </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${plugin.resources.version}</version>
+        </plugin>
 
-                <plugin>
-                    <artifactId>maven-shade-plugin</artifactId>
-                    <version>${plugin.shade.version}</version>
-                    <configuration>
-                        <createDependencyReducedPom>true</createDependencyReducedPom>
-                        <filters>
-                            <filter>
-                                <artifact>*:*</artifact>
-                                <excludes>
-                                    <exclude>META-INF/*.SF</exclude>
-                                    <exclude>META-INF/*.DSA</exclude>
-                                    <exclude>META-INF/*.RSA</exclude>
-                                </excludes>
-                            </filter>
-                        </filters>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>shade</goal>
-                            </goals>
-                            <configuration>
-                                <transformers>
-                                    <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-                                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                        <mainClass>${mainClass}</mainClass>
-                                    </transformer>
-                                </transformers>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
+        <plugin>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>${plugin.shade.version}</version>
+          <configuration>
+            <createDependencyReducedPom>true</createDependencyReducedPom>
+            <filters>
+              <filter>
+                <artifact>*:*</artifact>
+                <excludes>
+                  <exclude>META-INF/*.SF</exclude>
+                  <exclude>META-INF/*.DSA</exclude>
+                  <exclude>META-INF/*.RSA</exclude>
+                </excludes>
+              </filter>
+            </filters>
+          </configuration>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+              <configuration>
+                <transformers>
+                  <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                  <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <mainClass>${mainClass}</mainClass>
+                  </transformer>
+                </transformers>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
 
-                <plugin>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>${plugin.site.version}</version>
-                </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>${plugin.site.version}</version>
+        </plugin>
 
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>versions-maven-plugin</artifactId>
-                    <version>${plugin.versions.version}</version>
-                </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>${plugin.versions.version}</version>
+        </plugin>
 
-            </plugins>
-        </pluginManagement>
+      </plugins>
+    </pluginManagement>
 
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+
+  <profiles>
+    <!--
+        The testing profile is automatically activated once a src/test/java dir is found on the project.
+    -->
+    <profile>
+      <id>testing-java</id>
+      <activation>
+        <file>
+          <exists>src/test/java</exists>
+        </file>
+      </activation>
+
+      <build>
         <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-dependency-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-deploy-plugin</artifactId>
-            </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${plugin.surefire.version}</version>
+            <configuration>
+              <runOrder>random</runOrder>
+              <excludes>
+                <exclude>${pattern.class.itest}</exclude>
+                <exclude>${pattern.package.itest}</exclude>
+              </excludes>
+              <!-- prevent the annoying ForkedBooter process from stealing window focus on Mac OS -->
+              <argLine>-Djava.awt.headless=true</argLine>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>${plugin.failsafe.version}</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <skipTests>${skipITests}</skipTests>
+              <includes>
+                <include>${pattern.class.itest}</include>
+                <include>${pattern.package.itest}</include>
+              </includes>
+              <!-- prevent the annoying ForkedBooter process from stealing window focus on Mac OS -->
+              <argLine>-Djava.awt.headless=true</argLine>
+            </configuration>
+          </plugin>
         </plugins>
-    </build>
+      </build>
+    </profile>
 
-    <profiles>
-        <!--
-            This profile is activated once a src/main/scala directory is present on the project.
-            Scala and java sources are compiled via scala compiler, java compiler plugin is disabled.
-        // -->
-        <profile>
-            <id>scala-mixed-mode</id>
-            <activation>
-                <file>
-                    <exists>src/main/scala</exists>
-                </file>
-            </activation>
-            <dependencies>
-                <dependency>
-                    <groupId>org.scala-lang</groupId>
-                    <artifactId>scala-library</artifactId>
-                    <version>${scala.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.scalatest</groupId>
-                    <artifactId>scalatest_2.11</artifactId>
-                    <version>2.2.2</version>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>net.alchim31.maven</groupId>
-                        <artifactId>scala-maven-plugin</artifactId>
-                        <version>${plugin.scala.version}</version>
-                        <configuration>
-                            <recompileMode>incremental</recompileMode>
-                            <checkMultipleScalaVersions>false</checkMultipleScalaVersions>
-                            <args>
-                                <arg>-target:jvm-${java.version}</arg>
-                            </args>
-                            <javacArgs>
-                                <javacArg>-source</javacArg>
-                                <javacArg>${java.version}</javacArg>
-                                <javacArg>-target</javacArg>
-                                <javacArg>${java.version}</javacArg>
-                            </javacArgs>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>scala-compile-first</id>
-                                <phase>process-resources</phase>
-                                <goals>
-                                    <goal>add-source</goal>
-                                    <goal>compile</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>scala-test-compile</id>
-                                <phase>process-test-resources</phase>
-                                <goals>
-                                    <goal>testCompile</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <!-- disable java compiler in mixed scala projects -->
-                        <artifactId>maven-compiler-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>default-compile</id>
-                                <phase>none</phase>
-                            </execution>
-                            <execution>
-                                <id>default-testCompile</id>
-                                <phase>none</phase>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+    <!-- do not skip itests in integration-test phase-->
+    <profile>
+      <id>integration-test</id>
+      <properties>
+        <skipITests>false</skipITests>
+      </properties>
+    </profile>
 
-        <profile>
-            <id>web-archive</id>
-            <activation>
-                <file>
-                    <exists>src/main/webapp</exists>
-                </file>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <version>${plugin.war.version}</version>
-                        <configuration>
-                            <failOnMissingWebXml>false</failOnMissingWebXml>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+    <profile>
+      <id>info</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>versions-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <artifactId>maven-help-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
-        <!--
-            This profile is activated once a "yo" directory is present on the project.
-            Yo/Grunt and Java are combined to a common WAR file.
-        // -->
-        <profile>
-            <id>yo-mixed-mode</id>
-            <activation>
-                <file>
-                    <exists>${yeomanProjectDirectory}</exists>
-                </file>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.github.trecloux</groupId>
-                        <artifactId>yeoman-maven-plugin</artifactId>
-                        <version>${plugin.yeoman.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>build</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-clean-plugin</artifactId>
-                        <configuration>
-                            <filesets>
-                                <fileset>
-                                    <directory>${yeomanProjectDirectory}/dist</directory>
-                                </fileset>
-                                <fileset>
-                                    <directory>${yeomanProjectDirectory}/.tmp</directory>
-                                </fileset>
-                                <fileset>
-                                    <directory>${yeomanProjectDirectory}/bower_components</directory>
-                                </fileset>
-                                <fileset>
-                                    <directory>${yeomanProjectDirectory}/node_modules</directory>
-                                </fileset>
-                            </filesets>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>exec</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <executable>bower</executable>
-                            <arguments>
-                                <argument>install</argument>
-                            </arguments>
-                            <workingDirectory>${basedir}/${yeomanProjectDirectory}</workingDirectory>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>copy-resources</id>
-                                <phase>prepare-package</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${yeomanTargetDirectory}</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>${yeomanProjectDirectory}/dist</directory>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+  <licenses>
+    <license>
+      <name>Revised BSD License</name>
+      <url>
+        http://en.wikipedia.org/wiki/BSD_licenses#3-clause_license_.28.22Revised_BSD_License.22.2C_.22New_BSD_License.22.2C_or_.22Modified_BSD_License.22.29
+      </url>
+      <comments>see LICENSE.txt</comments>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
-        <!--
-            The testing profile is automatically activated once a src/test/java dir is found on the project.
-        -->
-        <profile>
-            <id>testing-java</id>
-            <activation>
-                <file>
-                    <exists>src/test/java</exists>
-                </file>
-            </activation>
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/${project.github.organisation}/${project.name}/issues</url>
+  </issueManagement>
 
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${plugin.surefire.version}</version>
-                        <configuration>
-                            <runOrder>random</runOrder>
-                            <excludes>
-                                <exclude>${pattern.class.itest}</exclude>
-                                <exclude>${pattern.package.itest}</exclude>
-                            </excludes>
-                            <!-- prevent the annoying ForkedBooter process from stealing window focus on Mac OS -->
-                            <argLine>-Djava.awt.headless=true</argLine>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${plugin.failsafe.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <skipTests>${skipITests}</skipTests>
-                            <includes>
-                                <include>${pattern.class.itest}</include>
-                                <include>${pattern.package.itest}</include>
-                            </includes>
-                            <!-- prevent the annoying ForkedBooter process from stealing window focus on Mac OS -->
-                            <argLine>-Djava.awt.headless=true</argLine>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <!-- do not skip itests in integration-test phase-->
-        <profile>
-            <id>integration-test</id>
-            <properties>
-                <skipITests>false</skipITests>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>info</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>versions-maven-plugin</artifactId>
-                    </plugin>
-                    <plugin>
-                        <artifactId>maven-help-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
-    <licenses>
-        <license>
-            <name>Revised BSD License</name>
-            <url>
-                http://en.wikipedia.org/wiki/BSD_licenses#3-clause_license_.28.22Revised_BSD_License.22.2C_.22New_BSD_License.22.2C_or_.22Modified_BSD_License.22.29
-            </url>
-            <comments>see LICENSE.txt</comments>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <issueManagement>
-        <url>https://github.com/holisticon/holisticon-oss-parent/issues</url>
-        <system>GitHub Issues</system>
-    </issueManagement>
-
-    <scm>
-        <connection>scm:git:git@github.com:holisticon/holisticon-oss-parent.git</connection>
-        <developerConnection>scm:git:git@github.com:holisticon/holisticon-oss-parent.git</developerConnection>
-        <url>git@github.com:holisticon/holisticon-oss-parent.git</url>
-        <tag>HEAD</tag>
-    </scm>
+  <scm>
+    <connection>scm:git:git@github.com:/${project.github.organisation}/${project.name}.git</connection>
+    <developerConnection>scm:git:git@github.com:/${project.github.organisation}/${project.name}.git</developerConnection>
+    <url>git@github.com:/${project.github.organisation}/${project.name}.git</url>
+    <tag>HEAD</tag>
+  </scm>
 
 </project>
