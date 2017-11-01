@@ -2,8 +2,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>de.holisticon.toolbox.maven</groupId>
-  <artifactId>toolbox-maven-oss-parent</artifactId>
+  <groupId>io.toolisticon.maven</groupId>
+  <artifactId>maven-oss-parent</artifactId>
   <version>0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
@@ -21,9 +21,10 @@
   <properties>
     <!-- overwrite these properties in your pom.xml if needed -->
     <java.version>1.8</java.version>
-    <maven-minor.version>3.5.0</maven-minor.version>
+    <maven-minor.version>3.5</maven-minor.version>
     <maven.version>${maven-minor.version}.0</maven.version>
-    <project.github.organisation>holisticon-toolbox</project.github.organisation>
+
+    <project.github.organisation>toolisticon</project.github.organisation>
 
     <!-- optional: to use the "exec" and "shade" plugins, the child pom should set a main application class -->
     <mainClass/>
