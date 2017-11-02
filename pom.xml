@@ -265,6 +265,16 @@
       </build>
     </profile>
 
+    <!--
+         _         _   _ _
+        | | _____ | |_| (_)_ __
+        | |/ / _ \| __| | | '_ \
+        |   < (_) | |_| | | | | |
+        |_|\_\___/ \__|_|_|_| |_|
+
+        activate kotlin compiler when src/main/kotlin is present
+
+    //-->
     <profile>
       <id>kotlin</id>
       <activation>

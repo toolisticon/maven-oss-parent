@@ -10,8 +10,8 @@
     <relativePath />
   </parent>
 
-  <groupId>io.toolisticon.maven.example</groupId>
-  <artifactId>maven-oss-parent-example-root</artifactId>
+  <groupId>io.toolisticon.maven.examples</groupId>
+  <artifactId>maven-oss-parent-example</artifactId>
   <packaging>pom</packaging>
 
   <modules>
