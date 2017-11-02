@@ -24,6 +24,12 @@
     <maven-minor.version>3.5</maven-minor.version>
     <maven.version>${maven-minor.version}.0</maven.version>
 
+    <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
+    <kotlin.version>1.1.51</kotlin.version>
+
+    <project.sourceDirectory>src/main/java</project.sourceDirectory>
+    <project.testSourceDirectory>src/test/java</project.testSourceDirectory>
+
     <project.github.organisation>toolisticon</project.github.organisation>
 
     <!-- optional: to use the "exec" and "shade" plugins, the child pom should set a main application class -->
@@ -40,11 +46,15 @@
     <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
     <project.build.resourceEncoding>${encoding}</project.build.resourceEncoding>
 
-    <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/</sonatypeOssDistMgmtSnapshotsUrl>
+    <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/
+    </sonatypeOssDistMgmtSnapshotsUrl>
   </properties>
 
   <build>
     <defaultGoal>clean install</defaultGoal>
+    <sourceDirectory>${project.sourceDirectory}</sourceDirectory>
+    <testSourceDirectory>${project.testSourceDirectory}</testSourceDirectory>
+
     <pluginManagement>
       <plugins>
         <plugin>
@@ -89,6 +99,13 @@
   </build>
 
   <profiles>
+    <profile>
+      <!-- private profile, only include during parent development -->
+      <id>_maven-oss-parent-examples</id>
+      <modules>
+        <module>examples</module>
+      </modules>
+    </profile>
     <!--                            _             _
           ___ ___  _ __ ___   _ __ | |_   _  __ _(_)_ __  ___
          / __/ _ \| '__/ _ \ | '_ \| | | | |/ _` | | '_ \/ __|
@@ -243,6 +260,74 @@
               <!-- prevent the annoying ForkedBooter process from stealing window focus on Mac OS -->
               <argLine>-Djava.awt.headless=true</argLine>
             </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>kotlin</id>
+      <activation>
+        <file>
+          <exists>src/main/kotlin</exists>
+        </file>
+      </activation>
+      <properties>
+        <project.sourceDirectory>src/main/kotlin</project.sourceDirectory>
+        <project.testSourceDirectory>src/test/kotlin</project.testSourceDirectory>
+      </properties>
+      <dependencies>
+        <dependency>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-stdlib</artifactId>
+          <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-test</artifactId>
+          <version>${kotlin.version}</version>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <artifactId>kotlin-maven-plugin</artifactId>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <version>${kotlin.version}</version>
+            <configuration>
+              <compilerPlugins>
+                <plugin>spring</plugin>
+              </compilerPlugins>
+              <jvmTarget>${java.version}</jvmTarget>
+            </configuration>
+            <executions>
+              <execution>
+                <id>compile</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>compile</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>test-compile</id>
+                <phase>test-compile</phase>
+                <goals>
+                  <goal>test-compile</goal>
+                </goals>
+              </execution>
+            </executions>
+            <dependencies>
+              <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-allopen</artifactId>
+                <version>${kotlin.version}</version>
+              </dependency>
+            </dependencies>
           </plugin>
         </plugins>
       </build>
