@@ -27,6 +27,8 @@
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     <kotlin.version>1.1.51</kotlin.version>
 
+    <spring-boot.version>1.5.8.RELEASE</spring-boot.version>
+
     <project.sourceDirectory>src/main/java</project.sourceDirectory>
     <project.testSourceDirectory>src/test/java</project.testSourceDirectory>
 
@@ -289,7 +291,7 @@
       <dependencies>
         <dependency>
           <groupId>org.jetbrains.kotlin</groupId>
-          <artifactId>kotlin-stdlib</artifactId>
+          <artifactId>kotlin-stdlib-jre8</artifactId>
           <version>${kotlin.version}</version>
         </dependency>
         <dependency>
@@ -302,12 +304,8 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <artifactId>kotlin-maven-plugin</artifactId>
             <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-maven-plugin</artifactId>
             <version>${kotlin.version}</version>
             <configuration>
               <compilerPlugins>
@@ -341,6 +339,48 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+
+    <!--
+                         _                   _                 _
+          ___ _ __  _ __(_)_ __   __ _      | |__   ___   ___ | |_
+         / __| '_ \| '__| | '_ \ / _` |_____| '_ \ / _ \ / _ \| __|
+         \__ \ |_) | |  | | | | | (_| |_____| |_) | (_) | (_) | |_
+         |___/ .__/|_|  |_|_| |_|\__, |     |_.__/ \___/ \___/ \__|
+             |_|                 |___/
+
+         use spring boot when 'spring-boot.version' is set
+
+    //-->
+    <profile>
+      <id>with-spring-boot</id>
+      <activation>
+        <file>
+          <exists>src/main/resources/application.yml</exists>
+        </file>
+      </activation>
+      <dependencyManagement>
+        <dependencies>
+          <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-dependencies</artifactId>
+            <version>${spring-boot.version}</version>
+            <scope>import</scope>
+            <type>pom</type>
+          </dependency>
+        </dependencies>
+      </dependencyManagement>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <version>${spring-boot.version}</version>
+          </plugin>
+        </plugins>
+      </build>
+
     </profile>
 
     <!-- do not skip itests in integration-test phase-->
