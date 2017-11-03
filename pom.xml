@@ -16,23 +16,22 @@
     <name>Holisticon AG</name>
     <url>http://www.holisticon.de/</url>
   </organization>
-  <url>https://github.com/${project.github.organisation}/${project.name}</url>
+  <url>https://github.com/${project.github.organization}/${project.github.repository}</url>
 
   <properties>
+    <!-- must overwrite - use your organization and repo! -->
+    <project.github.organization>toolisticon</project.github.organization>
+    <project.github.repository>${project.name}</project.github.repository>
+
     <!-- overwrite these properties in your pom.xml if needed -->
     <java.version>1.8</java.version>
-    <maven-minor.version>3.5</maven-minor.version>
-    <maven.version>${maven-minor.version}.0</maven.version>
+    <maven.minor.version>3.5</maven.minor.version>
+    <maven.version>${maven.minor.version}.0</maven.version>
 
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     <kotlin.version>1.1.51</kotlin.version>
 
     <spring-boot.version>1.5.8.RELEASE</spring-boot.version>
-
-    <project.sourceDirectory>src/main/java</project.sourceDirectory>
-    <project.testSourceDirectory>src/test/java</project.testSourceDirectory>
-
-    <project.github.organisation>toolisticon</project.github.organisation>
 
     <!-- optional: to use the "exec" and "shade" plugins, the child pom should set a main application class -->
     <mainClass/>
@@ -48,14 +47,13 @@
     <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
     <project.build.resourceEncoding>${encoding}</project.build.resourceEncoding>
 
-    <sonatypeOssDistMgmtSnapshotsUrl>https://oss.sonatype.org/content/repositories/snapshots/
+    <sonatypeOssDistMgmtSnapshotsUrl>
+      https://oss.sonatype.org/content/repositories/snapshots/
     </sonatypeOssDistMgmtSnapshotsUrl>
   </properties>
 
   <build>
     <defaultGoal>clean install</defaultGoal>
-    <sourceDirectory>${project.sourceDirectory}</sourceDirectory>
-    <testSourceDirectory>${project.testSourceDirectory}</testSourceDirectory>
 
     <pluginManagement>
       <plugins>
@@ -87,7 +85,7 @@
             <configuration>
               <rules>
                 <requireMavenVersion>
-                  <version>${maven-minor.version}</version>
+                  <version>${maven.minor.version}</version>
                 </requireMavenVersion>
                 <requireJavaVersion>
                   <version>${java.version}</version>
@@ -108,6 +106,8 @@
         <module>examples</module>
       </modules>
     </profile>
+
+
     <!--                            _             _
           ___ ___  _ __ ___   _ __ | |_   _  __ _(_)_ __  ___
          / __/ _ \| '__/ _ \ | '_ \| | | | |/ _` | | '_ \/ __|
@@ -116,7 +116,7 @@
                              |_|            |___/
     // -->
     <profile>
-      <id>toolbox-core-plugins</id>
+      <id>toolisticon-core-plugins</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
@@ -285,8 +285,8 @@
         </file>
       </activation>
       <properties>
-        <project.sourceDirectory>src/main/kotlin</project.sourceDirectory>
-        <project.testSourceDirectory>src/test/kotlin</project.testSourceDirectory>
+        <project.build.sourceDirectory>src/main/kotlin</project.build.sourceDirectory>
+        <project.build.testSourceDirectory>src/test/kotlin</project.build.testSourceDirectory>
       </properties>
       <dependencies>
         <dependency>
@@ -349,7 +349,7 @@
          |___/ .__/|_|  |_|_| |_|\__, |     |_.__/ \___/ \___/ \__|
              |_|                 |___/
 
-         use spring boot when 'spring-boot.version' is set
+         use spring boot when 'application.yml' is present
 
     //-->
     <profile>
@@ -492,10 +492,10 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:git:git@github.com:/${project.github.organisation}/${project.name}.git</connection>
-    <developerConnection>scm:git:git@github.com:/${project.github.organisation}/${project.name}.git
+    <connection>scm:git:git@github.com:/${project.github.organization}/${project.github.repository}.git</connection>
+    <developerConnection>scm:git:git@github.com:/${project.github.organization}/${project.github.repository}.git
     </developerConnection>
-    <url>git@github.com:/${project.github.organisation}/${project.name}.git</url>
+    <url>git@github.com:/${project.github.organization}/${project.github.repository}.git</url>
     <tag>HEAD</tag>
   </scm>
 
