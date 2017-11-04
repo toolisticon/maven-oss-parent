@@ -33,3 +33,7 @@ Features:
 Version:
 
 * `spring-boot.version`=1.5.8.RELEASE, can be overwritten in child pom. 
+
+# Meta
+
+* generate nice ascii font via http://patorjk.com/software/taag/#p=display&f=Standard&t=<YOUR_TEXT>

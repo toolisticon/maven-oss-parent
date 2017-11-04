@@ -16,12 +16,13 @@
     <name>Holisticon AG</name>
     <url>http://www.holisticon.de/</url>
   </organization>
-  <url>https://github.com/${project.github.organization}/${project.github.repository}</url>
+  <url>https://github.com/${project.github.coordinates}</url>
 
   <properties>
     <!-- must overwrite - use your organization and repo! -->
     <project.github.organization>toolisticon</project.github.organization>
     <project.github.repository>${project.name}</project.github.repository>
+
 
     <!-- overwrite these properties in your pom.xml if needed -->
     <java.version>1.8</java.version>
@@ -33,8 +34,6 @@
 
     <spring-boot.version>1.5.8.RELEASE</spring-boot.version>
 
-    <!-- optional: to use the "exec" and "shade" plugins, the child pom should set a main application class -->
-    <mainClass/>
 
     <skipDeploy>false</skipDeploy>
     <skipITests>true</skipITests>
@@ -43,28 +42,112 @@
     <pattern.class.itest>**/*ITest.java</pattern.class.itest>
 
     <!-- normally you won't overwrite the properties below -->
+    <project.github.coordinates>${project.github.organization}/${project.github.repository}</project.github.coordinates>
     <encoding>UTF-8</encoding>
     <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
     <project.build.resourceEncoding>${encoding}</project.build.resourceEncoding>
 
-    <sonatypeOssDistMgmtSnapshotsUrl>
+    <sonatype-oss-dist-mgmt-snapshots-url>
       https://oss.sonatype.org/content/repositories/snapshots/
-    </sonatypeOssDistMgmtSnapshotsUrl>
+    </sonatype-oss-dist-mgmt-snapshots-url>
   </properties>
 
   <build>
     <defaultGoal>clean install</defaultGoal>
 
+    <!--
+                                  _             _
+        ___ ___  _ __ ___   _ __ | |_   _  __ _(_)_ __  ___
+       / __/ _ \| '__/ _ \ | '_ \| | | | |/ _` | | '_ \/ __|
+      | (_| (_) | | |  __/ | |_) | | |_| | (_| | | | | \__ \
+       \___\___/|_|  \___| | .__/|_|\__,_|\__, |_|_| |_|___/
+                           |_|            |___/
+
+      define plugins in latest version - alphabetical order
+
+    // -->
     <pluginManagement>
       <plugins>
+        <!-- clean -->
         <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>exec-maven-plugin</artifactId>
-          <version>${plugin.exec.version}</version>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <!-- compile -->
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.7.0</version>
           <configuration>
-            <mainClass>${mainClass}</mainClass>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
           </configuration>
         </plugin>
+        <!-- dependency -->
+        <plugin>
+          <artifactId>maven-dependency-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <!-- deploy -->
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+          <configuration>
+            <skip>${skipDeploy}</skip>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-failsafe-plugin</artifactId>
+          <version>2.20.1</version>
+        </plugin>
+        <!-- help -->
+        <plugin>
+          <artifactId>maven-help-plugin</artifactId>
+          <version>2.2</version>
+        </plugin>
+        <!-- install -->
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <!-- jar -->
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+              </manifest>
+            </archive>
+          </configuration>
+        </plugin>
+        <!-- release -->
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.3</version>
+        </plugin>
+        <!-- resources -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <!-- shade -->
+        <plugin>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- site -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.6</version>
+        </plugin>
+        <!-- surefire -->
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.20.1</version>
+        </plugin>
+        <!-- version -->
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>versions-maven-plugin</artifactId>
@@ -73,6 +156,15 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <artifactId>maven-deploy-plugin</artifactId>
+      </plugin>
       <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
         <version>3.0.0-M1</version>
@@ -107,108 +199,6 @@
       </modules>
     </profile>
 
-
-    <!--                            _             _
-          ___ ___  _ __ ___   _ __ | |_   _  __ _(_)_ __  ___
-         / __/ _ \| '__/ _ \ | '_ \| | | | |/ _` | | '_ \/ __|
-        | (_| (_) | | |  __/ | |_) | | |_| | (_| | | | | \__ \
-         \___\___/|_|  \___| | .__/|_|\__,_|\__, |_|_| |_|___/
-                             |_|            |___/
-    // -->
-    <profile>
-      <id>toolisticon-core-plugins</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <!-- clean -->
-            <plugin>
-              <artifactId>maven-clean-plugin</artifactId>
-              <version>3.0.0</version>
-            </plugin>
-            <!-- compile -->
-            <plugin>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <version>3.7.0</version>
-              <configuration>
-                <source>${java.version}</source>
-                <target>${java.version}</target>
-              </configuration>
-            </plugin>
-            <!-- dependency -->
-            <plugin>
-              <artifactId>maven-dependency-plugin</artifactId>
-              <version>3.0.2</version>
-            </plugin>
-            <!-- deploy -->
-            <plugin>
-              <artifactId>maven-deploy-plugin</artifactId>
-              <version>2.8.2</version>
-              <configuration>
-                <skip>${skipDeploy}</skip>
-              </configuration>
-            </plugin>
-            <!-- help -->
-            <plugin>
-              <artifactId>maven-help-plugin</artifactId>
-              <version>2.2</version>
-            </plugin>
-            <!-- install -->
-            <plugin>
-              <artifactId>maven-install-plugin</artifactId>
-              <version>2.5.2</version>
-            </plugin>
-            <!-- jar -->
-            <plugin>
-              <artifactId>maven-jar-plugin</artifactId>
-              <version>3.0.2</version>
-              <configuration>
-                <archive>
-                  <manifest>
-                    <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                    <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                  </manifest>
-                </archive>
-              </configuration>
-            </plugin>
-            <!-- release -->
-            <plugin>
-              <artifactId>maven-release-plugin</artifactId>
-              <version>2.5.3</version>
-            </plugin>
-            <!-- resources -->
-            <plugin>
-              <artifactId>maven-resources-plugin</artifactId>
-              <version>3.0.2</version>
-            </plugin>
-            <!-- shade -->
-            <plugin>
-              <artifactId>maven-shade-plugin</artifactId>
-              <version>3.1.0</version>
-            </plugin>
-            <!-- site -->
-            <plugin>
-              <artifactId>maven-site-plugin</artifactId>
-              <version>3.6</version>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-        <plugins>
-          <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <artifactId>maven-dependency-plugin</artifactId>
-          </plugin>
-          <plugin>
-            <artifactId>maven-deploy-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
     <!--
           _            _           _             _
          | |_ ___  ___| |_   _ __ | |_   _  __ _(_)_ __  ___
@@ -231,7 +221,6 @@
         <plugins>
           <plugin>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.20.1</version>
             <configuration>
               <runOrder>random</runOrder>
               <excludes>
@@ -244,7 +233,6 @@
           </plugin>
           <plugin>
             <artifactId>maven-failsafe-plugin</artifactId>
-            <version>2.20.1</version>
             <executions>
               <execution>
                 <goals>
@@ -292,6 +280,11 @@
         <dependency>
           <groupId>org.jetbrains.kotlin</groupId>
           <artifactId>kotlin-stdlib-jre8</artifactId>
+          <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <artifactId>kotlin-reflect</artifactId>
           <version>${kotlin.version}</version>
         </dependency>
         <dependency>
@@ -436,7 +429,7 @@
     <snapshotRepository>
       <id>sonatype-nexus-snapshots</id>
       <name>Sonatype Nexus Snapshots</name>
-      <url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
+      <url>${sonatype-oss-dist-mgmt-snapshots-url}</url>
     </snapshotRepository>
     <repository>
       <id>sonatype-nexus-staging</id>
@@ -462,10 +455,10 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:git:git@github.com:/${project.github.organization}/${project.github.repository}.git</connection>
-    <developerConnection>scm:git:git@github.com:/${project.github.organization}/${project.github.repository}.git
+    <connection>scm:git:git@github.com:/${project.github.coordinates}.git</connection>
+    <developerConnection>scm:git:git@github.com:/${project.github.coordinates}.git
     </developerConnection>
-    <url>git@github.com:/${project.github.organization}/${project.github.repository}.git</url>
+    <url>git@github.com:/${project.github.coordinates}.git</url>
     <tag>HEAD</tag>
   </scm>
 
