@@ -30,7 +30,7 @@
     <maven.version>${maven.minor.version}.0</maven.version>
 
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
-    <kotlin.version>1.1.51</kotlin.version>
+    <kotlin.version>1.1.60</kotlin.version>
 
     <spring-boot.version>1.5.8.RELEASE</spring-boot.version>
 
