@@ -17,7 +17,7 @@ Features:
 
 Version:
 
-* `kotlin.version`=1.1.51, can be overwritten in child pom.
+* `kotlin.version`=1.1.61, can be overwritten in child pom.
 
 ## Spring Boot
 
