@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.toolisticon.maven</groupId>
   <artifactId>maven-oss-parent</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <packaging>pom</packaging>
 
   <description>
@@ -259,8 +258,7 @@
          _         _   _ _
         | | _____ | |_| (_)_ __
         | |/ / _ \| __| | | '_ \
-        |   < (_) | |_| | | | | |
-        |_|\_\___/ \__|_|_|_| |_|
+        |   < (_) | |_| | | | | | |_|\_\___/ \__|_|_|_| |_|
 
         activate kotlin compiler when src/main/kotlin is present
 
@@ -458,7 +456,7 @@
     <connection>scm:git:git@github.com:${project.github.coordinates}.git</connection>
     <developerConnection>scm:git:git@github.com:${project.github.coordinates}.git</developerConnection>
     <url>git@github.com:/${project.github.coordinates}.git</url>
-    <tag>HEAD</tag>
+    <tag>maven-oss-parent-0.1</tag>
   </scm>
 
 </project>
