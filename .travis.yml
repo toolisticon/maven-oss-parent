@@ -6,4 +6,4 @@ install: true
 cache:
   directories:
     - $HOME/.m2
-script: ./mvnw clean install
+script: ./mvnw clean verify -P_maven-oss-parent-examples

@@ -17,4 +17,24 @@
       <artifactId>spring-boot-starter</artifactId>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <layout>ZIP</layout>
+          <mainClass>io.toolisticon.maven.example.kotlin.ApplicationKt</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
