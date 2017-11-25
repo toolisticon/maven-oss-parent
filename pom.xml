@@ -455,9 +455,8 @@
   </issueManagement>
 
   <scm>
-    <connection>scm:git:git@github.com:/${project.github.coordinates}.git</connection>
-    <developerConnection>scm:git:git@github.com:/${project.github.coordinates}.git
-    </developerConnection>
+    <connection>scm:git:git@github.com:${project.github.coordinates}.git</connection>
+    <developerConnection>scm:git:git@github.com:${project.github.coordinates}.git</developerConnection>
     <url>git@github.com:/${project.github.coordinates}.git</url>
     <tag>HEAD</tag>
   </scm>
