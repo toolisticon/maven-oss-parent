@@ -4,7 +4,7 @@
   <groupId>io.toolisticon.maven</groupId>
   <artifactId>maven-oss-parent</artifactId>
   <name>${project.artifactId}</name>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <packaging>pom</packaging>
 
   <description>
@@ -265,9 +265,7 @@
          _         _   _ _
         | | _____ | |_| (_)_ __
         | |/ / _ \| __| | | '_ \
-        |   < (_) | |_| | | | | | |_|\_\___/ \__|_|_|_| |_|
-
-        activate kotlin compiler when src/main/kotlin is present
+        |   < (_) | |_| | | | | | |_|\_\___/ \__|_|_|_| |_| activate kotlin compiler when src/main/kotlin is present
 
     //-->
     <profile>
