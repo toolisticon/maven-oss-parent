@@ -25,6 +25,12 @@
       <name>Jan Galinski</name>
       <organization>${project.organization.name}</organization>
     </developer>
+    <developer>
+      <id>zambrovski</id>
+      <name>Simon Zambrovski</name>
+      <organization>${project.organization.name}</organization>
+    </developer>
+
   </developers>
 
   <properties>
@@ -160,6 +166,18 @@
           <artifactId>versions-maven-plugin</artifactId>
           <version>2.5</version>
         </plugin>
+        <!-- sources -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.0.1</version>
+        </plugin>
+        <!-- javadoc -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.10.4</version>
+        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
@@ -266,14 +284,10 @@
          _         _   _ _
         | | _____ | |_| (_)_ __
         | |/ / _ \| __| | | '_ \
-<<<<<<< HEAD
-        |   < (_) | |_| | | | | | |_|\_\___/ \__|_|_|_| |_| activate kotlin compiler when src/main/kotlin is present 
-=======
         |   < (_) | |_| | | | | |
         |_|\_\___/ \__|_|_|_| |_|
 
         activate kotlin compiler when src/main/kotlin is present
->>>>>>> Added signature plugin
 
     //-->
     <profile>
