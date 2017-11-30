@@ -11,26 +11,7 @@
     Parent pom for all holisticon OSS projects. Use this instead of sonatype/oss-parent for common properties and
     pre-configured modules.
   </description>
-
-  <organization>
-    <name>Holisticon AG</name>
-    <url>http://www.holisticon.de/</url>
-  </organization>
   <url>https://github.com/${project.github.coordinates}</url>
-
-  <developers>
-    <developer>
-      <id>jangalinski</id>
-      <name>Jan Galinski</name>
-      <organization>${project.organization.name}</organization>
-    </developer>
-    <developer>
-      <id>zambrovski</id>
-      <name>Simon Zambrovski</name>
-      <organization>${project.organization.name}</organization>
-    </developer>
-
-  </developers>
 
   <properties>
     <!-- must overwrite - use your organization and repo! -->
@@ -283,7 +264,12 @@
          _         _   _ _
         | | _____ | |_| (_)_ __
         | |/ / _ \| __| | | '_ \
-        |   < (_) | |_| | | | | | |_|\_\___/ \__|_|_|_| |_| activate kotlin compiler when src/main/kotlin is present //-->
+        |   < (_) | |_| | | | | |
+        |_|\_\___/ \__|_|_|_| |_|
+
+        activate kotlin compiler when src/main/kotlin is present
+
+    //-->
     <profile>
       <id>auto-kotlin</id>
       <activation>
@@ -505,7 +491,25 @@
     <connection>scm:git:git@github.com:${project.github.coordinates}.git</connection>
     <developerConnection>scm:git:git@github.com:${project.github.coordinates}.git</developerConnection>
     <url>git@github.com:/${project.github.coordinates}.git</url>
-    <tag>maven-oss-parent-0.1</tag>
+    <tag>maven-oss-parent-0.4</tag>
   </scm>
+
+  <organization>
+    <name>Holisticon AG</name>
+    <url>http://www.holisticon.de/</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>jangalinski</id>
+      <name>Jan Galinski</name>
+      <organization>${project.organization.name}</organization>
+    </developer>
+    <developer>
+      <id>zambrovski</id>
+      <name>Simon Zambrovski</name>
+      <organization>${project.organization.name}</organization>
+    </developer>
+  </developers>
 
 </project>

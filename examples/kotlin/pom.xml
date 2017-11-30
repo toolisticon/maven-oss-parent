@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.toolisticon.maven.examples</groupId>
     <artifactId>maven-oss-parent-example</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.5-SNAPSHOT</version>
   </parent>
 
   <artifactId>maven-oss-parent-example-kotlin</artifactId>

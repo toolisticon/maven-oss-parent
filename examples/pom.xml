@@ -6,12 +6,16 @@
   <parent>
     <artifactId>maven-oss-parent</artifactId>
     <groupId>io.toolisticon.maven</groupId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.5-SNAPSHOT</version>
   </parent>
 
   <groupId>io.toolisticon.maven.examples</groupId>
   <artifactId>maven-oss-parent-example</artifactId>
   <packaging>pom</packaging>
+
+  <properties>
+    <skipDeploy>true</skipDeploy>
+  </properties>
 
   <modules>
     <module>kotlin</module>
