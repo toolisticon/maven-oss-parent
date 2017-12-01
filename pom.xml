@@ -7,6 +7,10 @@
   <version>0.5-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+  <modules>
+    <module>examples</module>
+  </modules>
+
   <description>
     Parent pom for all holisticon OSS projects. Use this instead of sonatype/oss-parent for common properties and
     pre-configured modules.
@@ -196,15 +200,7 @@
   </build>
 
   <profiles>
-    <profile>
-      <!-- private profile, only include during parent development -->
-      <id>_maven-oss-parent-examples</id>
-      <modules>
-        <module>examples</module>
-      </modules>
-    </profile>
-
-    <!--
+     <!--
           _            _           _             _
          | |_ ___  ___| |_   _ __ | |_   _  __ _(_)_ __  ___
          | __/ _ \/ __| __| | '_ \| | | | |/ _` | | '_ \/ __|
@@ -284,7 +280,7 @@
       <dependencies>
         <dependency>
           <groupId>org.jetbrains.kotlin</groupId>
-          <artifactId>kotlin-stdlib-jre8</artifactId>
+          <artifactId>kotlin-stdlib-jdk8</artifactId>
           <version>${kotlin.version}</version>
         </dependency>
         <dependency>
