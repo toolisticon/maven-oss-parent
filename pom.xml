@@ -4,7 +4,7 @@
   <groupId>io.toolisticon.maven</groupId>
   <artifactId>maven-oss-parent</artifactId>
   <name>${project.artifactId}</name>
-  <version>0.6.3-SNAPSHOT</version>
+  <version>0.6.2</version>
   <packaging>pom</packaging>
 
   <description>
@@ -275,7 +275,7 @@
     <connection>scm:git:git@github.com:${toolisticon.github.coordinates}.git</connection>
     <developerConnection>scm:git:git@github.com:${toolisticon.github.coordinates}.git</developerConnection>
     <url>git@github.com:/${toolisticon.github.coordinates}.git</url>
-    <tag>maven-oss-parent-0.4</tag>
+    <tag>maven-oss-parent-0.6.2</tag>
   </scm>
 
   <organization>
