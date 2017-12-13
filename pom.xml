@@ -4,7 +4,7 @@
   <groupId>io.toolisticon.maven</groupId>
   <artifactId>maven-oss-parent</artifactId>
   <name>${project.artifactId}</name>
-  <version>0.6.2</version>
+  <version>0.6.3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <description>
@@ -90,9 +90,11 @@
           <artifactId>maven-failsafe-plugin</artifactId>
           <version>2.20.1</version>
         </plugin>
+        <!-- artefact signing -->
         <plugin>
           <artifactId>maven-gpg-plugin</artifactId>
-          <version>1.4</version> <!-- do not change to 1.6, it fails! -->
+          <!-- do not change to 1.6, it fails! -->
+          <version>1.4</version>
         </plugin>
         <!-- help -->
         <plugin>
@@ -196,9 +198,12 @@
     </plugins>
   </build>
 
-
   <profiles>
     <profile>
+      <!--
+           this profile enables creation of ASC signatures
+           during release perform phase of maven-release-plugin
+      -->
       <id>release-sign-artifacts</id>
       <activation>
         <property>
@@ -224,8 +229,6 @@
       </build>
     </profile>
   </profiles>
-
-
 
   <repositories>
     <repository>
@@ -275,7 +278,7 @@
     <connection>scm:git:git@github.com:${toolisticon.github.coordinates}.git</connection>
     <developerConnection>scm:git:git@github.com:${toolisticon.github.coordinates}.git</developerConnection>
     <url>git@github.com:/${toolisticon.github.coordinates}.git</url>
-    <tag>maven-oss-parent-0.6.2</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <organization>
