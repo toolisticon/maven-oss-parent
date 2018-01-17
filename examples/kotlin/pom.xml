@@ -12,6 +12,7 @@
   <artifactId>maven-oss-parent-example-kotlin</artifactId>
 
   <properties>
+    <spring-boot.version>1.5.9</spring-boot.version>
     <kotlin.version>1.2.10</kotlin.version>
   </properties>
 
@@ -20,7 +21,7 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>2.0.0.M7</version>
+        <version>${spring-boot.version}</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
