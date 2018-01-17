@@ -61,6 +61,7 @@
     <maven-site-plugin.version>3.7</maven-site-plugin.version>
     <maven-surefire-plugin.version>2.20.1</maven-surefire-plugin.version>
     <maven-versions-plugin.version>2.5</maven-versions-plugin.version>
+    <maven-jacoco-plugin.version>0.8.0</maven-jacoco-plugin.version>
   </properties>
 
   <build>
@@ -136,6 +137,26 @@
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>${maven-install-plugin.version}</version>
+        </plugin>
+        <!-- jacoco - test coverage -->
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${maven-jacoco-plugin.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>report</id>
+              <phase>test</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
         <!-- jar -->
         <plugin>
