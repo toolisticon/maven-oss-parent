@@ -186,6 +186,9 @@
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>${maven-resources-plugin.version}</version>
+          <configuration>
+            <encoding>${toolisticon.encoding}</encoding>
+          </configuration>
         </plugin>
         <!-- shade -->
         <plugin>
