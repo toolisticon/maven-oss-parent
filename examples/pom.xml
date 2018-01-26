@@ -6,15 +6,15 @@
   <parent>
     <groupId>io.toolisticon.maven</groupId>
     <artifactId>maven-oss-parent</artifactId>
-    <version>0.6.4-SNAPSHOT</version>
+    <version>0.7.0-SNAPSHOT</version>
   </parent>
 
   <groupId>io.toolisticon.maven.example</groupId>
-  <artifactId>maven-oss-parent-example</artifactId>
+  <artifactId>maven-oss-parent-example-root</artifactId>
   <packaging>pom</packaging>
 
   <properties>
-    <toolisticon-deployment-skip>true</toolisticon-deployment-skip>
+    <toolisticon.deployment.skip>true</toolisticon.deployment.skip>
   </properties>
 
   <modules>
