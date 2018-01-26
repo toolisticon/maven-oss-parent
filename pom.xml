@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>io.toolisticon.maven</groupId>
@@ -23,7 +24,7 @@
     <!-- overwrite these properties in your pom.xml if needed -->
     <java.version>1.8</java.version>
     <maven.minor.version>3.5</maven.minor.version>
-    <maven.version>${maven.minor.version}.0</maven.version>
+    <maven.version>${maven.minor.version}.2</maven.version>
 
     <!-- normally you won't overwrite the properties below -->
 
@@ -37,6 +38,12 @@
     <sonatype-oss-dist-mgmt-snapshots-url>https://oss.sonatype.org/content/repositories/snapshots/</sonatype-oss-dist-mgmt-snapshots-url>
   </properties>
 
+  <!--
+  needed to run versions:display-plugin-updates & versions:display-dependency-updates
+  <prerequisites>
+    <maven>${maven.minor.version}</maven>
+  </prerequisites>
+  -->
   <build>
     <defaultGoal>clean install</defaultGoal>
 
@@ -121,7 +128,6 @@
         </plugin>
         <!-- javadoc -->
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
@@ -129,6 +135,10 @@
         <plugin>
           <artifactId>maven-release-plugin</artifactId>
           <version>2.5.3</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>2.9</version>
         </plugin>
         <!-- resources -->
         <plugin>
@@ -143,7 +153,7 @@
         <!-- site -->
         <plugin>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.6</version>
+          <version>3.7</version>
         </plugin>
         <!-- surefire -->
         <plugin>
@@ -158,7 +168,6 @@
         </plugin>
         <!-- sources -->
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-source-plugin</artifactId>
           <version>3.0.1</version>
         </plugin>
@@ -243,7 +252,6 @@
       </snapshots>
     </repository>
   </repositories>
-
 
   <distributionManagement>
     <snapshotRepository>

@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>maven-oss-parent</artifactId>
     <groupId>io.toolisticon.maven</groupId>
-    <version>0.5.0-SNAPSHOT</version>
+    <artifactId>maven-oss-parent</artifactId>
+    <version>0.6.4-SNAPSHOT</version>
   </parent>
 
-  <groupId>io.toolisticon.maven.examples</groupId>
+  <groupId>io.toolisticon.maven.example</groupId>
   <artifactId>maven-oss-parent-example</artifactId>
   <packaging>pom</packaging>
 
