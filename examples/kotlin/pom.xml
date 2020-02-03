@@ -4,14 +4,14 @@
   <parent>
     <groupId>io.toolisticon.maven.example</groupId>
     <artifactId>maven-oss-parent-example-root</artifactId>
-    <version>0.7.1-SNAPSHOT</version>
+    <version>0.8.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>maven-oss-parent-example-kotlin</artifactId>
 
   <properties>
-    <spring-boot.version>1.5.9.RELEASE</spring-boot.version>
-    <kotlin.version>1.2.10</kotlin.version>
+    <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
+    <kotlin.version>1.3.61</kotlin.version>
   </properties>
 
   <dependencyManagement>

@@ -5,6 +5,10 @@
 
 Maven parent as a base for future oss projects.
 
-# Meta
+## Development
+
+* run `mvn versions:display-plugin-updates` to check for plugin updates
+
+## Meta
 
 * generate nice ascii font via http://patorjk.com/software/taag/#p=display&f=Standard&t=<YOUR_TEXT>
