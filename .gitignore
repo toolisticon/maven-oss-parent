@@ -18,3 +18,5 @@ release.properties
 .classpath
 .project
 .settings
+.mvn/maven.config
+.java-version
