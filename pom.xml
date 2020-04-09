@@ -42,7 +42,7 @@
     <sonatype-oss-dist-mgmt-snapshots-url>https://oss.sonatype.org/content/repositories/snapshots/</sonatype-oss-dist-mgmt-snapshots-url>
 
     <!-- maven plugin versions defined in this pom -->
-    <maven-build-helper-plugin.version>3.0.0</maven-build-helper-plugin.version>
+    <maven-build-helper-plugin.version>3.1.0</maven-build-helper-plugin.version>
     <maven-clean-plugin.version>3.0.0</maven-clean-plugin.version>
     <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
     <maven-dependency-plugin.version>3.0.2</maven-dependency-plugin.version>
