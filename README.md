@@ -6,6 +6,8 @@
 
 Maven parent as a base for future oss projects.
 
+ARCHIVED - use https://github.com/toolisticon/maven-parent-kotlin-base
+
 ## Development
 
 * run `mvn versions:display-plugin-updates` to check for plugin updates
